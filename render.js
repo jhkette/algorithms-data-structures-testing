@@ -9,9 +9,11 @@ const render = async filePath => {
       runScripts: 'dangerously',
       resources: 'usable'
   })
-  // return dom
-  return dom;
-
+  new Promise((resolve, reject) => {
+  dom.window.document.addEventListener('DOMContentLoaded', () => {
+    resolve(dom)
+  });
+})
 }
 
 module.exports = render;

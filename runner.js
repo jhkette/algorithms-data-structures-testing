@@ -52,18 +52,25 @@ class Runner {
   // to this.testfiles()
   // target path is the description
   async collectFiles(targetPath) {
+    // readdir from the target directory
     const files = await fs.promises.readdir(targetPath);
-    console.log(targetPath);
-
+   
+    // loop through files
     for (let file of files) {
+      // join path
       const filepath = path.join(targetPath, file);
+      // stats gets file status (lstat is the function does this)
       const stats = await fs.promises.lstat(filepath);
-
+      // stats is a file and includes 'test.js'
       if (stats.isFile() && file.includes("test.js")) {
+        // push file
         this.testFiles.push({ name: filepath });
-      } else if (stats.isDirectory() && !this.forbiddenDirs.includes(file)) {
-        const childFiles = await fs.promises.readdir(filepath);
 
+      } 
+      // directory && is not in forbidden dirs
+        else if (stats.isDirectory() && !this.forbiddenDirs.includes(file)) {
+        const childFiles = await fs.promises.readdir(filepath);
+      //  push new files into 'files' array.
         files.push(...childFiles.map(f => path.join(file, f)));
       }
     }
