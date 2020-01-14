@@ -1,8 +1,13 @@
 const fs = require("fs");
 const path = require("path");
+const render = require('./render')
+const chalk = require('chalk')
 
 class Runner {
+  // constructor 
   constructor() {
+    // testfiles and forbiddenDirs 
+    // and forbiddenDirs
     this.testFiles = [];
     this.forbiddenDirs = ["node_modules"];
   }
@@ -12,27 +17,40 @@ class Runner {
       // the description 'should sum an array' and a function
       // are paramaters
       const beforeEaches = [];
+      // global render function
+      global.render = render;
+      // global beforeEach 
+      // pushes each function 
+      // into beforeeaches
       global.beforeEach = fn => {
         beforeEaches.push(fn);
       };
-      global.it = (desc, fn) => {
+      global.it = async (desc, fn) => {
+        // call beforeeach functions (a loop that loops through)
         beforeEaches.forEach(func => func());
         try {
-          fn();
-          console.log(`Ok - ${desc}`);
+          // call fn (a parameter in the global it function)
+          await fn();
+          // Console.log description (a parameter of it function)
+          console.log(chalk.green(`\tOK - ${desc}`));
         } catch (err) {
-          console.log(`X - ${desc}`);
-          console.log("\t", err.message);
+          // catch Console.log description again
+          console.log(chalk.red(`\tX - ${desc}`));
+           // catch Console.log err.message
+          console.log(chalk.red('\t', err.message));
         }
       };
       try {
+        // require file.name
         require(file.name);
       } catch (err) {
-        console.log(err);
+        console.log(chalk.red(err));
       }
     }
   }
-
+  // This function collects files and push 
+  // to this.testfiles()
+  // target path is the description
   async collectFiles(targetPath) {
     const files = await fs.promises.readdir(targetPath);
     console.log(targetPath);
