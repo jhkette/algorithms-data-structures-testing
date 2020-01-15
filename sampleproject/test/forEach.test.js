@@ -27,6 +27,5 @@ it('should sum an array', () => {
 
 it('before each is run', ()=> {
     assert.strictEqual(numbers.length,3);
-   
 })
 
