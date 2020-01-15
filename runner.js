@@ -69,6 +69,7 @@ class Runner {
       }
       // directory && is not in forbidden dirs
       else if (stats.isDirectory() && !this.forbiddenDirs.includes(file)) {
+        
         const childFiles = await fs.promises.readdir(filepath);
         //  push new files into 'files' array.
         files.push(...childFiles.map(f => path.join(file, f)));
