@@ -20,3 +20,5 @@ function maxChar(str){
           return hash[a] > hash[b] ? a:b
     })
 }
+
+module.exports = maxChar;
