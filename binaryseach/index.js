@@ -1,6 +1,5 @@
 
 // refactored version of binary search
-
 function search (arr,target){
     var start = 0;
     var end = arr.length -1;
