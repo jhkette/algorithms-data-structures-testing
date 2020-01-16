@@ -14,10 +14,9 @@ function maxChar(str){
         }else{
             hash[c] = 1;
         }
-
     }
     return Object.keys(hash).reduce((a,b) => {
-          return hash[a] > hash[b] ? a:b
+          return hash[a] > hash[b] ? a : b
     })
 }
 
