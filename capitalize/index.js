@@ -16,3 +16,5 @@ function capitalize(str){
     }
     return y.join(' ');
 }
+
+module.exports = capitalize;
