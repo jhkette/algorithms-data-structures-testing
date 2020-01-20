@@ -4,22 +4,18 @@
 // # USING A TWO POINTER TECHNIQUE
 
 function findsum(numbers, target){
-    i = 0;
-    j = numbers.length -1;
+    let i =0;
+    let j= numbers.length -1;
     while(i < j){
-       let temp = numbers[i] + numbers[j];
-       if(temp == target){
-           let arr =[i, j]
-           return arr;
-       }
-        else if(temp < target){
-           i ++
-        }
-        else{
-            j --
+        if(numbers[i] + numbers[j]== target){
+            return [i,j];
+        }else if(numbers[i] + numbers[j] < target){
+            i++;
+        }else{
+            j --;
         }
     }
-    return []
+  
 }
 
 module.exports = findsum;

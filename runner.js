@@ -45,6 +45,7 @@ class Runner {
         // require file.name
         require(file.name);
       } catch (err) {
+        // chalk err
         console.log(chalk.red(err));
       }
     }
