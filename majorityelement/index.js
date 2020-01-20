@@ -26,7 +26,9 @@ function majorityelement(arr){
         }
 
     }
-   return Object.keys(hash).reduce((a,b) => {
+   return parseInt(Object.keys(hash).reduce((a,b) => {
         return hash[a] > hash[b] ? a : b
-    })
+    }))
 }
+
+module.exports = majorityelement;
