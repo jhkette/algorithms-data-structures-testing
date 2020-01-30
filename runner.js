@@ -3,6 +3,9 @@ const path = require("path");
 const render = require("./render");
 const chalk = require("chalk");
 
+// This class has two methods. One collects filenames from a directory 
+// (collectFiles(targetPath)) . The other (runTests) 
+
 class Runner {
   // constructor
   constructor() {
@@ -20,19 +23,20 @@ class Runner {
       // global render function
       global.render = render;
       // global beforeEach
-      // pushes each function
+      // pushes each beforeach function (if it exists)
       // into beforeeaches
       global.beforeEach = fn => {
         beforeEaches.push(fn);
       };
       // define GLOBAL 'it' function
       global.it = async (desc, fn) => {
-        // call beforeeach functions (a loop that loops through)
+        // call beforeeach functions (a loop that loops through) if they exist
         beforeEaches.forEach(func => func());
         try {
           // call fn (a parameter in the global it function)
           await fn();
           // Console.log description (a parameter of it function)
+          // this will console log if there is no error otherwise catch block will run
           console.log(chalk.green(`\tOK - ${desc}`));
         } catch (err) {
           // catch Console.log description again
